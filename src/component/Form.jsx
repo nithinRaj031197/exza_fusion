@@ -1,4 +1,4 @@
-import { Button, Container, Stack, Typography } from "@mui/material";
+import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import React from "react";
 
 const FormComponent = ({
@@ -11,6 +11,8 @@ const FormComponent = ({
   onSelectBackFile,
   onSelectFrontFile,
   loading,
+  idProofNumber,
+  setIdProofNumber,
 }) => {
   return (
     <>
@@ -32,14 +34,7 @@ const FormComponent = ({
                 <Typography>Front Side</Typography>
                 <Button variant="outlined" component="label">
                   Upload
-                  <input
-                    onChange={onSelectFrontFile}
-                    hidden
-                    id="frontSide"
-                    name="frontSide"
-                    accept="image/*"
-                    type="file"
-                  />
+                  <input onChange={onSelectFrontFile} hidden id="frontSide" name="frontSide" accept="image/*" type="file" />
                 </Button>
                 <div className="h-32 w-56">{frontSide && <img className="h-32 w-56" src={frontSidePreview} />}</div>
               </Stack>
@@ -47,17 +42,20 @@ const FormComponent = ({
                 <Typography>Back Side</Typography>
                 <Button variant="outlined" component="label">
                   Upload
-                  <input
-                    onChange={onSelectBackFile}
-                    hidden
-                    id="frontSide"
-                    name="frontSide"
-                    accept="image/*"
-                    type="file"
-                  />
+                  <input onChange={onSelectBackFile} hidden id="frontSide" name="frontSide" accept="image/*" type="file" />
                 </Button>
                 <div className="h-32 w-56">{backSide && <img className="h-32 w-56" src={backSidePreview} />}</div>
               </Stack>
+              <TextField
+                sx={{ marginBottom: 2 }}
+                id="idProofNum"
+                name="idProofNum"
+                required
+                fullWidth
+                label="Id Proof Number"
+                type="text"
+                onChange={(e) => setIdProofNumber(e.target.value)}
+              />
             </Container>
             <Button disabled={loading} sx={{ mt: 1, mb: 2 }} color="info" fullWidth variant="contained" type="submit">
               Submit

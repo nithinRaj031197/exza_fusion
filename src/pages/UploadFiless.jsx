@@ -13,6 +13,7 @@ const UploadFiless = () => {
   const [currentStep, setCurrentStep] = useState([]);
   const [show, setShow] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [idProofNumber, setIdProofNumber] = useState("");
 
   const getCurrentProcess = async (processId) => {
     setLoading(true);
@@ -76,6 +77,7 @@ const UploadFiless = () => {
       let formData = new FormData();
       formData.append("attachment", frontSide);
       formData.append("attachment", backSide);
+      formData.append("idProofNumber", idProofNumber);
       formData.append("step", step === "DRIVINNG_LICENSE" ? "DRIVING_LICENSE" : step);
       await axios
         .post(`/uploadDocument/${referenceId}`, formData)
@@ -109,6 +111,8 @@ const UploadFiless = () => {
         onSelectBackFile={onSelectBackFile}
         show={show}
         loading={loading}
+        idProofNumber={idProofNumber}
+        setIdProofNumber={setIdProofNumber}
       />
       {/* <div className="flex flex-col divide-y-2 divide-zinc-500">
         {show ? (

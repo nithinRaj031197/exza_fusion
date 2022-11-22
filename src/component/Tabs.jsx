@@ -15,13 +15,7 @@ function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
+    <div role="tabpanel" hidden={value !== index} id={`full-width-tabpanel-${index}`} aria-labelledby={`full-width-tab-${index}`} {...other}>
       {value === index && (
         <Box sx={{ p: 3 }}>
           <Typography>{children}</Typography>
@@ -55,6 +49,8 @@ export default function TabsComponent({
   onSelectFrontFile,
   show,
   loading,
+  idProofNumber,
+  setIdProofNumber,
 }) {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -71,10 +67,7 @@ export default function TabsComponent({
     <Box sx={{ bgcolor: "background.paper", width: "100", flex: 5 }}>
       {show ? (
         <>
-          <AppBar
-            position="static"
-            sx={{ display: "flex", flexDirection: "row", justifyContent: "space-around", paddingTop: 1 }}
-          >
+          <AppBar position="static" sx={{ display: "flex", flexDirection: "row", justifyContent: "space-around", paddingTop: 1 }}>
             <Typography variant="h4" sx={{ flex: 1, paddingLeft: 1 }}>
               EXZA FUSION
             </Typography>
@@ -94,11 +87,7 @@ export default function TabsComponent({
           </AppBar>
           {loading && <LinearProgress color="secondary" />}
 
-          <SwipeableViews
-            axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-            index={value}
-            onChangeIndex={handleChangeIndex}
-          >
+          <SwipeableViews axis={theme.direction === "rtl" ? "x-reverse" : "x"} index={value} onChangeIndex={handleChangeIndex}>
             {currentStep?.map((step, index) => {
               return (
                 <TabPanel key={index} value={index} index={index} dir={theme.direction}>
@@ -112,6 +101,8 @@ export default function TabsComponent({
                     onSelectFrontFile={onSelectFrontFile}
                     onSelectBackFile={onSelectBackFile}
                     loading={loading}
+                    idProofNumber={idProofNumber}
+                    setIdProofNumber={setIdProofNumber}
                   />
                 </TabPanel>
               );
@@ -120,10 +111,7 @@ export default function TabsComponent({
         </>
       ) : (
         <>
-          <AppBar
-            position="static"
-            sx={{ display: "flex", flexDirection: "row", justifyContent: "space-around", paddingTop: 1 }}
-          >
+          <AppBar position="static" sx={{ display: "flex", flexDirection: "row", justifyContent: "space-around", paddingTop: 1 }}>
             {loading && <LinearProgress color="secondary" />}
             <Typography variant="h4" sx={{ flex: 1, paddingLeft: 1 }}>
               EXZA FUSION
